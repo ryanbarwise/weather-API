@@ -16,6 +16,7 @@
 
 
 
+//http://maps.openweathermap.org/maps/2.0/weather/TA2/{z}/{x}/{y}?date=1527811200&
 
 
 
@@ -116,25 +117,30 @@ function get5DayForecast(id){
       //var temp = (response.list[i].main.temp - 273.15) * 1.80 + 32;
         //fiveDayForecast.text("Temp: " + temp.toFixed(2));
         //$('#fiveDay').append(fiveDayForecast);
+    
+    $('.oneDate').text(moment().add(1,'days').format("M/D/YYYY"));
     $('.oneTemp').html("Temp: " + Math.floor((response.list[1].main.temp - 273.15) * 1.80 + 32));
     $('.oneHum').html("Humidity: " + response.list[1].main.humidity);
-
+    
+    $('.twoDate').text(moment().add(2,'days').format("M/D/YYYY"));
     $('.twoTemp').html("Temp: " + Math.floor((response.list[2].main.temp - 273.15) * 1.80 + 32));
     $('.twoHum').html("Humidity: " + response.list[2].main.humidity);
 
-
+    $('.threeDate').text(moment().add(3,'days').format("M/D/YYYY"));
     $('.threeTemp').html("Temp: " + Math.floor((response.list[3].main.temp - 273.15) * 1.80 + 32));
     $('.threeHum').html("Humidity: " + response.list[3].main.humidity);
 
-
+    $('.fourDate').text(moment().add(4,'days').format("M/D/YYYY"));
     $('.fourTemp').html("Temp: " + Math.floor((response.list[4].main.temp - 273.15) * 1.80 + 32));
     $('.fourHum').html("Humidity: " + response.list[4].main.humidity);
 
-
+    $('.fiveDate').text(moment().add(5,'days').format("M/D/YYYY"));
     $('.fiveTemp').html("Temp: " + Math.floor((response.list[5].main.temp - 273.15) * 1.80 + 32));
     $('.fiveHum').html("Humidity: " + response.list[5].main.humidity);
 
+        //console.log(response);
 
+        
  
     
    
