@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+
     <title>Weather-API</title>
 </head>
 
@@ -23,43 +24,58 @@
             <form>
                 <div class="input-section">
                     <label for="city-search">Search for a City:</label>
-                    <input type="text" name="city" id="city"/>
+                    <input type="text" name="city" id="city" />
                     <button id="search">Search</button>
-                  </div>
+                </div>
             </form>
-                <div>
-                    <uL id="cities-list"></uL>
+            <div>
+                <uL id="cities-list"></uL>
+            </div>
+        </div>
+        <div class="col-md-9" id="right-side">
+            <div id="city-date">
+                <h1 id="cityName"></h1>
+                <h3 id="date"></h3>
+            </div>
+            <div id="weather-stats">
+                <h3>Temperature: <span id="temperature"></span></h3>
+                <h3>Humidity: <span id="humidity"></span></h3>
+                <h3>Wind Speed: <span id="wind-speed"></span></h3>
+                <h3>UV Index: <span id="uv-index"></span></h3>
+            </div>
+                    <div id="five-day">
+                     <h2>Five Day Forecast:</h2>
+                    </div>
+                   
+                    <div id="dayOne">
+                      <p class= "oneTemp"></p>
+                      <p class="oneHum"></p>
+                    </div>
 
+                    <div id="dayTwo">
+                        <p class= "twoTemp"></p>
+                        <p class="twoHum"></p>
+                    </div>
 
-                        
+                    <div id="dayThree">
+                        <p class="threeTemp">
+                        <p class="threeHum"></p>
+                    </div>
+
+                    <div id="dayFour">
+                        <p class= "fourTemp"></p>
+                        <p class="fourHum"></p>
+                     </div>
+
+                    <div id="dayFive">
+                        <p class= "fiveTemp"></p>
+                        <p class="fiveHum"></p>
+                     </div>
+
+                    
+                    </div>
                     
 
-                
-                </div>
-         </div>
-         <div class ="col-md-9" id="right-side">
-<h1 id="city"></h1>
-<h3>Temperature <span id="temperature"></span></h3>
-<h3 id="humidity"></h3>
-<div class="5day"></div>
-            
-
-
-
-
-
-
-
-
-        </div>
-    </div>
-
-
-
-
-    </div>
-
-    </div>
 
 
 
@@ -78,8 +94,23 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="main.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+                    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+                    <script src="main.js"></script>
 
 
 

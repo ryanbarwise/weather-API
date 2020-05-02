@@ -31,10 +31,11 @@
 // initial API call for the submission
 
 var apiKey = "eabeeba621cf3fcced68195ecef7292d";
-var cityName = '';//$('#city').val();
+var cityName = ''///$('#city').val();
 var cityArray = [];
 var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=";
-
+var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?id=";
+//var tempF = (response.main.temp - 273.15) * 1.80 + 32;
 $('#search').on('click', function (event) {
     event.preventDefault();
 
@@ -61,7 +62,7 @@ function renderSavedCities() {
             getCurrentWeather(cityArray[value]);
         })
         $('#cities-list').prepend(listThings);
-
+        
     }
 
 };
@@ -80,36 +81,85 @@ function getCurrentWeather(name) {
             renderSavedCities();
         }
         console.log(response);
+        var today = moment().format("(M/ D/ YYYY)");
+        $('#date').text(today);
+        //$('#date').moment().format("M","D","GGGG");
+        $('#cityName').text(response.name);
+        var tempF = (response.main.temp - 273.15) * 1.80 + 32;
+        $('#temperature').text(Math.floor(tempF));
+        $('#humidity').text(response.main.humidity);
+        $('#wind-speed').text(response.wind.speed);
+
+
         // render weather
         // get 5day forecast
         get5DayForecast(response.id);
-
-        //get uv index
-        getUVIndex(response.coord.lat, lon)
+        //console.log(response.id);
+       
+      // getUVIndex(response.coord.lat, lon)
     })
 };
 
 function get5DayForecast(id){
-    // ajax call    
+       
     $.ajax({
-        url: queryURL + name + "&appid=" + apiKey,
+        url: queryURL2 + id + "&appid=" + apiKey,
         method: "GET"
     }).then(function (response) {
         console.log(response);
-        // render 5-day weather
-    })
-}
+        console.log(response.list[1].main.temp);
+        console.log(response.list[1].main.humidity);
+    
+    //for (var i = 1; i<6; i++) {
+      //var fiveDayForecast =  $('<div>');
+      //fivaDayForecast.attr('data-temp', i);
+      //var temp = (response.list[i].main.temp - 273.15) * 1.80 + 32;
+        //fiveDayForecast.text("Temp: " + temp.toFixed(2));
+        //$('#fiveDay').append(fiveDayForecast);
+    $('.oneTemp').html("Temp: " + Math.floor((response.list[1].main.temp - 273.15) * 1.80 + 32));
+    $('.oneHum').html("Humidity: " + response.list[1].main.humidity);
 
-function getUVIndex(lat, lon){
+    $('.twoTemp').html("Temp: " + Math.floor((response.list[2].main.temp - 273.15) * 1.80 + 32));
+    $('.twoHum').html("Humidity: " + response.list[2].main.humidity);
+
+
+    $('.threeTemp').html("Temp: " + Math.floor((response.list[3].main.temp - 273.15) * 1.80 + 32));
+    $('.threeHum').html("Humidity: " + response.list[3].main.humidity);
+
+
+    $('.fourTemp').html("Temp: " + Math.floor((response.list[4].main.temp - 273.15) * 1.80 + 32));
+    $('.fourHum').html("Humidity: " + response.list[4].main.humidity);
+
+
+    $('.fiveTemp').html("Temp: " + Math.floor((response.list[5].main.temp - 273.15) * 1.80 + 32));
+    $('.fiveHum').html("Humidity: " + response.list[5].main.humidity);
+
+
+ 
+    
+   
+    
+   
+})
+    
+};
+
+    
+    
+    
+    
+ 
+
+//function getUVIndex(lat, lon){
     //ajax call
-    $.ajax({
-        url: 'api.openweathermap.org/data/2.5/uvi?lat=' + lat + '&lon=' + lon,
-        method: "GET"
-    }).then(function (response) {
-        console.log('UV INDEX')
-        console.log(response);
-        //render uv index
-    })
-}
+    //$.ajax({
+        //url: 'api.openweathermap.org/data/2.5/uvi?lat=' + lat + '&lon=' + lon,
+        //method: "GET"
+    //}).then(function (response) {
+       // console.log('UV INDEX')
+        //console.log(response);
+       // //render uv index
+    ////})
+//}
 cityArray = localStorage.getItem('cities').split(',');
 renderSavedCities();
