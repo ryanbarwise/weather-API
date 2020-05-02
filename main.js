@@ -36,6 +36,7 @@ var cityName = ''///$('#city').val();
 var cityArray = [];
 var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=";
 var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?id=";
+var queryURL3 = "https://api.openweathermap.org/data/2.5/uvi?lat="
 //var tempF = (response.main.temp - 273.15) * 1.80 + 32;
 $('#search').on('click', function (event) {
     event.preventDefault();
@@ -63,7 +64,7 @@ function renderSavedCities() {
             getCurrentWeather(cityArray[value]);
         })
         $('#cities-list').prepend(listThings);
-        
+
     }
 
 };
@@ -96,13 +97,13 @@ function getCurrentWeather(name) {
         // get 5day forecast
         get5DayForecast(response.id);
         //console.log(response.id);
-       
-      // getUVIndex(response.coord.lat, lon)
+
+        // getUVIndex(response.coord.lat, lon)
     })
 };
 
-function get5DayForecast(id){
-       
+function get5DayForecast(id) {
+
     $.ajax({
         url: queryURL2 + id + "&appid=" + apiKey,
         method: "GET"
@@ -110,62 +111,78 @@ function get5DayForecast(id){
         console.log(response);
         console.log(response.list[1].main.temp);
         console.log(response.list[1].main.humidity);
-    
-    //for (var i = 1; i<6; i++) {
-      //var fiveDayForecast =  $('<div>');
-      //fivaDayForecast.attr('data-temp', i);
-      //var temp = (response.list[i].main.temp - 273.15) * 1.80 + 32;
+
+        //for (var i = 1; i<6; i++) {
+        //var fiveDayForecast =  $('<div>');
+        //fivaDayForecast.attr('data-temp', i);
+        //var temp = (response.list[i].main.temp - 273.15) * 1.80 + 32;
         //fiveDayForecast.text("Temp: " + temp.toFixed(2));
         //$('#fiveDay').append(fiveDayForecast);
-    
-    $('.oneDate').text(moment().add(1,'days').format("M/D/YYYY"));
-    $('.oneTemp').html("Temp: " + Math.floor((response.list[1].main.temp - 273.15) * 1.80 + 32));
-    $('.oneHum').html("Humidity: " + response.list[1].main.humidity);
-    
-    $('.twoDate').text(moment().add(2,'days').format("M/D/YYYY"));
-    $('.twoTemp').html("Temp: " + Math.floor((response.list[2].main.temp - 273.15) * 1.80 + 32));
-    $('.twoHum').html("Humidity: " + response.list[2].main.humidity);
 
-    $('.threeDate').text(moment().add(3,'days').format("M/D/YYYY"));
-    $('.threeTemp').html("Temp: " + Math.floor((response.list[3].main.temp - 273.15) * 1.80 + 32));
-    $('.threeHum').html("Humidity: " + response.list[3].main.humidity);
+        $('.oneDate').text(moment().add(1, 'days').format("M/D/YYYY"));
+        $('.oneTemp').html("Temp: " + Math.floor((response.list[1].main.temp - 273.15) * 1.80 + 32));
+        $('.oneHum').html("Humidity: " + response.list[1].main.humidity);
 
-    $('.fourDate').text(moment().add(4,'days').format("M/D/YYYY"));
-    $('.fourTemp').html("Temp: " + Math.floor((response.list[4].main.temp - 273.15) * 1.80 + 32));
-    $('.fourHum').html("Humidity: " + response.list[4].main.humidity);
+        $('.twoDate').text(moment().add(2, 'days').format("M/D/YYYY"));
+        $('.twoTemp').html("Temp: " + Math.floor((response.list[2].main.temp - 273.15) * 1.80 + 32));
+        $('.twoHum').html("Humidity: " + response.list[2].main.humidity);
 
-    $('.fiveDate').text(moment().add(5,'days').format("M/D/YYYY"));
-    $('.fiveTemp').html("Temp: " + Math.floor((response.list[5].main.temp - 273.15) * 1.80 + 32));
-    $('.fiveHum').html("Humidity: " + response.list[5].main.humidity);
+        $('.threeDate').text(moment().add(3, 'days').format("M/D/YYYY"));
+        $('.threeTemp').html("Temp: " + Math.floor((response.list[3].main.temp - 273.15) * 1.80 + 32));
+        $('.threeHum').html("Humidity: " + response.list[3].main.humidity);
 
-        //console.log(response);
+        $('.fourDate').text(moment().add(4, 'days').format("M/D/YYYY"));
+        $('.fourTemp').html("Temp: " + Math.floor((response.list[4].main.temp - 273.15) * 1.80 + 32));
+        $('.fourHum').html("Humidity: " + response.list[4].main.humidity);
 
-        
- 
-    
-   
-    
-   
-})
-    
+        $('.fiveDate').text(moment().add(5, 'days').format("M/D/YYYY"));
+        $('.fiveTemp').html("Temp: " + Math.floor((response.list[5].main.temp - 273.15) * 1.80 + 32));
+        $('.fiveHum').html("Humidity: " + response.list[5].main.humidity);
+
+        //console.log(response.city.coord.lat, response.city.coord.lon);
+        //console.log(response.coord);
+        getUVIndex(response.city.coord.lat, response.city.coord.lon);
+
+
+
+
+
+
+
+    })
+
 };
 
-    
-    
-    
-    
- 
 
-//function getUVIndex(lat, lon){
+
+
+
+
+
+function getUVIndex(lat, lon) {
     //ajax call
-    //$.ajax({
-        //url: 'api.openweathermap.org/data/2.5/uvi?lat=' + lat + '&lon=' + lon,
-        //method: "GET"
-    //}).then(function (response) {
-       // console.log('UV INDEX')
-        //console.log(response);
-       // //render uv index
-    ////})
-//}
+    $.ajax({
+        url: queryURL3 + lat + '&lon=' + lon + "&appid=" + apiKey,
+        method: "GET"
+    }).then(function (response) {
+        //console.log('UV INDEX');
+        console.log(response);
+        // //render uv index
+        var uvInd = (Math.floor(response.value));
+        if (uvInd === 8 || uvInd === 9 || uvInd === 10) {
+            $('#uv-index').text(uvInd).css("background-color", "red");
+        } else if (uvInd === 6 || uvInd === 7) {
+            $('#uv-index').text(uvInd).css("background-color", "orange");
+        } else if (uvInd === 3 || uvINd === 4 || uvInd === 5) {
+            $('#uv-index').text(uvInd).css("background-color", "yellow");
+        } else {
+            $('#uv-index').text(uvInd).css("background-color", "lightblue");
+        }
+
+    })
+       
+    }
+
+
 cityArray = localStorage.getItem('cities').split(',');
 renderSavedCities();
