@@ -119,25 +119,25 @@ function get5DayForecast(id) {
         //fiveDayForecast.text("Temp: " + temp.toFixed(2));
         //$('#fiveDay').append(fiveDayForecast);
 
-        $('.oneDate').text(moment().add(1, 'days').format("M/D/YYYY"));
-        $('.oneTemp').html("Temp: " + Math.floor((response.list[1].main.temp - 273.15) * 1.80 + 32));
-        $('.oneHum').html("Humidity: " + response.list[1].main.humidity);
+        $('.oneDate').text(moment().add(1, 'days').format("(M/D/YYYY)"))
+        $('.oneTemp').html("Temp: " + Math.floor((response.list[1].main.temp - 273.15) * 1.80 + 32)).css("background-color", "red");
+        $('.oneHum').html("Humidity: " + response.list[1].main.humidity + "%");
 
-        $('.twoDate').text(moment().add(2, 'days').format("M/D/YYYY"));
-        $('.twoTemp').html("Temp: " + Math.floor((response.list[2].main.temp - 273.15) * 1.80 + 32));
-        $('.twoHum').html("Humidity: " + response.list[2].main.humidity);
+        $('.twoDate').text(moment().add(2, 'days').format("(M/D/YYYY)"));
+        $('.twoTemp').html("Temp: " + Math.floor((response.list[2].main.temp - 273.15) * 1.80 + 32)).css("background-color", "orange");
+        $('.twoHum').html("Humidity: " + response.list[2].main.humidity + '%');
 
-        $('.threeDate').text(moment().add(3, 'days').format("M/D/YYYY"));
-        $('.threeTemp').html("Temp: " + Math.floor((response.list[3].main.temp - 273.15) * 1.80 + 32));
-        $('.threeHum').html("Humidity: " + response.list[3].main.humidity);
+        $('.threeDate').text(moment().add(3, 'days').format("(M/D/YYYY)"));
+        $('.threeTemp').html("Temp: " + Math.floor((response.list[3].main.temp - 273.15) * 1.80 + 32)).css("background-color", "yellow");
+        $('.threeHum').html("Humidity: " + response.list[3].main.humidity + "%");
 
-        $('.fourDate').text(moment().add(4, 'days').format("M/D/YYYY"));
-        $('.fourTemp').html("Temp: " + Math.floor((response.list[4].main.temp - 273.15) * 1.80 + 32));
-        $('.fourHum').html("Humidity: " + response.list[4].main.humidity);
+        $('.fourDate').text(moment().add(4, 'days').format("(M/D/YYYY)"));
+        $('.fourTemp').html("Temp: " + Math.floor((response.list[4].main.temp - 273.15) * 1.80 + 32)).css("background-color", "green");
+        $('.fourHum').html("Humidity: " + response.list[4].main.humidity + "%");
 
-        $('.fiveDate').text(moment().add(5, 'days').format("M/D/YYYY"));
-        $('.fiveTemp').html("Temp: " + Math.floor((response.list[5].main.temp - 273.15) * 1.80 + 32));
-        $('.fiveHum').html("Humidity: " + response.list[5].main.humidity);
+        $('.fiveDate').text(moment().add(5, 'days').format("(M/D/YYYY)"));
+        $('.fiveTemp').html("Temp: " + Math.floor((response.list[5].main.temp - 273.15) * 1.80 + 32)).css("background-color", "purple");
+        $('.fiveHum').html("Humidity: " + response.list[5].main.humidity + "%");
 
         //console.log(response.city.coord.lat, response.city.coord.lon);
         //console.log(response.coord);
@@ -166,17 +166,18 @@ function getUVIndex(lat, lon) {
         method: "GET"
     }).then(function (response) {
         //console.log('UV INDEX');
+        
         console.log(response);
         // //render uv index
         var uvInd = (Math.floor(response.value));
         if (uvInd === 8 || uvInd === 9 || uvInd === 10) {
-            $('#uv-index').text(uvInd).css("background-color", "red");
+            $('#uv-index').text(uvInd).css("background-color", "red")
         } else if (uvInd === 6 || uvInd === 7) {
             $('#uv-index').text(uvInd).css("background-color", "orange");
-        } else if (uvInd === 3 || uvINd === 4 || uvInd === 5) {
+        } else if (uvInd === 3 || uvInd === 4 || uvInd === 5) {
             $('#uv-index').text(uvInd).css("background-color", "yellow");
         } else {
-            $('#uv-index').text(uvInd).css("background-color", "lightblue");
+            $('#uv-index').text(uvInd).css("background-color", "gray");
         }
 
     })

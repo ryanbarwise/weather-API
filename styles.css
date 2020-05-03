@@ -1,6 +1,12 @@
+body {
+    box-sizing: border-box;
+}
+
+
+
 header {
     text-align: center;
-    background: darkcyan;
+    background: lightblue;
     padding: 5px;
     border-color: orangered;
     border-style: solid;
@@ -18,6 +24,7 @@ header {
 
 body {
     margin: 20px;
+    background-color: lightgrey;
 }
 
 ul {
@@ -42,7 +49,27 @@ button {
 #dayFour,
 #dayFive {
     display: inline-block;
-    margin: 20px, 20px, 20px, 0px;
+    margin: 20px 20px 20px 0px;
+    background-color: lightblue;
+    padding: 20px;
+    
+    color: black;
+
 }
+
+.temp {
+    padding: 10px;
+}
+
+
+li:hover{
+    color: red;
+}
+
+#five-day {
+    margin-top: 30px;
+}
+
+
 
 
